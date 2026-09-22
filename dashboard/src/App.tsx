@@ -7,7 +7,7 @@ import {
 import {
   ShieldAlert, CheckCircle, Bug, Eye, RefreshCw, FileText,
   Activity, Globe, Play, Code, Copy, Check, ExternalLink, Download,
-  SlidersHorizontal, Terminal, Zap, Info, ChevronRight
+  SlidersHorizontal, Terminal, Zap, Info, ChevronRight, Trash2
 } from 'lucide-react';
 
 const API_BASE = 'http://localhost:5000/api';
@@ -77,6 +77,16 @@ export default function App() {
     } catch (err: any) {
       alert('Failed to trigger pipeline: ' + (err.response?.data?.error || err.message));
       setPipelineRunning(false);
+    }
+  };
+
+  const handleResetDatabase = async () => {
+    if (!window.confirm('Are you sure you want to clear all previous test history and start fresh with 0 records?')) return;
+    try {
+      await axios.post(`${API_BASE}/database/reset`);
+      fetchData();
+    } catch (err: any) {
+      alert('Failed to clear database history: ' + err.message);
     }
   };
 
@@ -218,13 +228,16 @@ export default function App() {
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <span className="badge badge-low" style={{ fontSize: '13px', padding: '6px 14px', display: 'flex', gap: '6px', alignItems: 'center' }}>
               <span className="pulse-dot"></span>
               Live DB Synced
             </span>
-            <button onClick={fetchData} className="btn-secondary">
+            <button onClick={fetchData} className="btn-secondary" title="Refresh Dashboard">
               <RefreshCw size={14} /> Refresh
+            </button>
+            <button onClick={handleResetDatabase} className="btn-danger-outline" title="Clear DB History">
+              <Trash2 size={14} /> Clear History
             </button>
           </div>
         </header>
@@ -381,6 +394,11 @@ export default function App() {
                         </div>
                       </div>
                     ))}
+                    {timeline.length === 0 && (
+                      <p style={{ color: '#9ca3af', textAlign: 'center', padding: '20px' }}>
+                        No activity records yet. Enter a Target URL and click "Run Agent Pipeline".
+                      </p>
+                    )}
                   </div>
                 </div>
               </>
@@ -517,6 +535,13 @@ export default function App() {
                         </td>
                       </tr>
                     ))}
+                    {testCases.length === 0 && (
+                      <tr>
+                        <td colSpan={4} style={{ textAlign: 'center', color: '#9ca3af', padding: '30px' }}>
+                          No test specs generated yet.
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -543,6 +568,9 @@ export default function App() {
                       </div>
                     </div>
                   ))}
+                  {pages.length === 0 && (
+                    <p style={{ color: '#9ca3af', padding: '20px' }}>No pages discovered yet.</p>
+                  )}
                 </div>
 
                 <h3 style={{ fontSize: '16px', margin: '20px 0 12px 0', color: '#a78bfa' }}>Mapped Primary User Flows</h3>
@@ -605,6 +633,13 @@ export default function App() {
                         <td style={{ fontSize: '13px', color: '#cbd5e1' }}>{a.fix_suggestion}</td>
                       </tr>
                     ))}
+                    {filteredA11y.length === 0 && (
+                      <tr>
+                        <td colSpan={4} style={{ textAlign: 'center', color: '#9ca3af', padding: '30px' }}>
+                          No WCAG accessibility issues match current filter.
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>

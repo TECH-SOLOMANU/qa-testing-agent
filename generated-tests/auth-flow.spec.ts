@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Auth Flow Tests', () => {
-  const BASE_URL = 'https://the-internet.herokuapp.com';
+  const BASE_URL = 'http://localhost:4000';
 
   test('Happy Path - Successful Login with Valid Credentials', async ({ page }) => {
     await page.goto(`${BASE_URL}/login`);
