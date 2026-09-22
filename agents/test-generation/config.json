@@ -1,0 +1,8 @@
+{
+  "name": "Test Generation Agent",
+  "target_framework": "playwright",
+  "language": "typescript",
+  "allowed_selectors": ["data-testid", "aria-role", "aria-label"],
+  "forbidden_selectors": ["xpath", "brittle-css"],
+  "generate_cases": ["happy-path", "negative-validation"]
+}

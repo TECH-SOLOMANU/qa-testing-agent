@@ -1,0 +1,32 @@
+{
+  "name": "qa-testing-agent",
+  "version": "1.0.0",
+  "description": "Autonomous QA & Testing Agent with Playwright, Axe Accessibility Scanner, Ingestion DB, and React Dashboard",
+  "main": "dist/pipeline.js",
+  "scripts": {
+    "start:demo": "ts-node demo-app/src/server.ts",
+    "start:ingestion": "ts-node ingestion/src/server.ts",
+    "start:dashboard": "cd dashboard && npm run dev",
+    "pipeline": "ts-node agents/pipeline.ts",
+    "test:generated": "npx playwright test generated-tests/",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "axios": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "playwright": "^1.45.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.9",
+    "@types/sqlite3": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2"
+  }
+}

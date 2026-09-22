@@ -1,0 +1,9 @@
+{
+  "name": "Bug Analysis Agent",
+  "rerun_attempts": 1,
+  "flakiness_threshold": 1,
+  "classification_rules": {
+    "API/backend": ["500 Internal Server Error", "database error", "API crash"],
+    "UI/frontend": ["element timeout", "selector missing", "assertion error"]
+  }
+}

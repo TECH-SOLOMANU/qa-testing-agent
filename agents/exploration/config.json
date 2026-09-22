@@ -1,0 +1,7 @@
+{
+  "name": "Exploration Agent",
+  "max_depth": 3,
+  "max_pages": 25,
+  "classify_types": ["auth-login", "auth-register", "dashboard", "crud-store", "validation-form"],
+  "element_selectors": ["data-testid", "role", "aria-label", "button", "a", "input", "select", "textarea"]
+}

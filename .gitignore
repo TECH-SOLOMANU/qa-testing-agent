@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+qa_agent.db
+uploads/*
+!uploads/.gitkeep
+.env
+.DS_Store
+*.log
