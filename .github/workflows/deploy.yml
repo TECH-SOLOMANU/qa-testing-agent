@@ -28,13 +28,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-          cache-dependency-path: dashboard/package-lock.json
 
       - name: Install dependencies & build
         run: |
           cd dashboard
-          npm ci
+          npm install
           npm run build
 
       - name: Upload Pages Artifact
