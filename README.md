@@ -170,9 +170,9 @@ docker-compose -f infra/docker-compose.yml up -d
 
 ## 📚 Additional Documentation
 
-- [Architecture Design & Data Models](docs/ARCHITECTURE.md)
-- [Ingestion REST API Reference](docs/API_REFERENCE.md)
-- [Agent Customization & Rule Configuration Guide](docs/AGENT_GUIDE.md)
+- [Architecture Design & Data Models](documentation/ARCHITECTURE.md)
+- [Ingestion REST API Reference](documentation/API_REFERENCE.md)
+- [Agent Customization & Rule Configuration Guide](documentation/AGENT_GUIDE.md)
 
 ---
 
