@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('CRUD Items Flow Tests', () => {
-  const BASE_URL = 'http://localhost:4000';
+  const BASE_URL = 'https://the-internet.herokuapp.com';
 
   test('Happy Path - Create and Delete Item Successfully', async ({ page }) => {
     await page.goto(`${BASE_URL}/items`);

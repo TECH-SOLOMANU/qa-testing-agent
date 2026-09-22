@@ -28,12 +28,39 @@ let pipelineStatus = {
   lastRunTime: null as string | null
 };
 
+// Clear Database Endpoint
+app.post('/api/database/reset', async (req, res) => {
+  try {
+    await runSql(`DELETE FROM Bug`);
+    await runSql(`DELETE FROM TestResult`);
+    await runSql(`DELETE FROM TestRun`);
+    await runSql(`DELETE FROM TestCase`);
+    await runSql(`DELETE FROM Flow`);
+    await runSql(`DELETE FROM Page`);
+    await runSql(`DELETE FROM AccessibilityIssue`);
+    res.json({ success: true, message: 'Database reset successfully' });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // --- Pipeline Trigger Endpoint ---
 app.post('/api/pipeline/run', async (req, res) => {
   const { targetUrl = 'http://localhost:4000' } = req.body;
   if (pipelineStatus.running) {
     return res.status(400).json({ error: 'Pipeline is already running.' });
   }
+
+  // Clear previous runs so new target URL stats are 100% clean and isolated
+  try {
+    await runSql(`DELETE FROM Bug`);
+    await runSql(`DELETE FROM TestResult`);
+    await runSql(`DELETE FROM TestRun`);
+    await runSql(`DELETE FROM TestCase`);
+    await runSql(`DELETE FROM Flow`);
+    await runSql(`DELETE FROM Page`);
+    await runSql(`DELETE FROM AccessibilityIssue`);
+  } catch (e) {}
 
   pipelineStatus = {
     running: true,
